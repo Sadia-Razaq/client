@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,27 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'client';
+  title = 'The Dating App';
+  users: any;
+
+
+  constructor(private http:HttpClient){}
+
+
+
+
+ngOnInit() {
+    this.getUsers();
+
+  }
+  getUsers(){
+    this.http.get('https://localhost:5001/api/users').subscribe(response =>{
+      this.users = response;
+
+    }, error => {
+      console.log(error);
+    });
+  }
+
+
 }
